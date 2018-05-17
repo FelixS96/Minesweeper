@@ -2,8 +2,9 @@
 
 
 
-Player::Player()
+Player::Player(int x, int y)
 {
+
 }
 
 
