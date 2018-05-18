@@ -1,12 +1,13 @@
 #include <iostream>
 #include "Game.h"
-#include "Screen.h"
 #include "Player.h"
 #include "Map.h"
+#include "Level.h"
 
 
-enum gamestate { splash, startmenu, level, gameover };
-gamestate gamestatus = level;
+enum gamestate { exitgame, splash, startmenu, ingame, gameover };
+gamestate gamestatus = ingame;
+Level*level = new Level();
 Game::Game()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -14,7 +15,7 @@ Game::Game()
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		//error
 	}
-	Screen MainWindow = Screen("Minesweeper",50,50,640,480);
+	Game::screen = new Screen("Minesweeper",50,50,640,480);
 	
 }
 
@@ -22,13 +23,12 @@ int Game::GetState()
 {
 	return State;
 }
-
 void Game::SetState(int State)
 {
 	this->State = State;
 }
 
-void Game::Update()
+void Game::Update(float deltaTime)
 {
 	SDL_PollEvent(&e);
 	if (e.type == SDL_QUIT) {
@@ -40,8 +40,8 @@ void Game::Update()
 		break;
 	case startmenu:
 		break;
-	case level:
-		
+	case ingame:
+		level->Update(deltaTime);
 		break;
 	case gameover:
 		break;

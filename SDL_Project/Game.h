@@ -1,15 +1,17 @@
 #pragma once
 #include <SDL.h>
+#include "Screen.h"
 class Game
 {
 private:
 	int State = 1;
-	SDL_Event e;
 public:
+	SDL_Event e;
+	Screen* screen;
 	Game();
 	int GetState();
 	void SetState(int State);
-	void Update();
+	void Update(float deltaTime);
 
 	~Game();
 };

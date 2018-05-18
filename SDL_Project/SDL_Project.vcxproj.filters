@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\states">
+      <UniqueIdentifier>{494637a1-9772-43e0-90b2-29818aa8e3bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\states">
+      <UniqueIdentifier>{397e3e51-5a14-4d04-818d-ea4595b7aa46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,16 +40,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Gameover.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\states</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\states</Filter>
     </ClCompile>
     <ClCompile Include="Splash.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\states</Filter>
     </ClCompile>
     <ClCompile Include="Startmenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\states</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,16 +69,16 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gameover.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="Splash.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="Startmenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\states</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
