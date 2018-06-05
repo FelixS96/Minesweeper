@@ -15,7 +15,7 @@ Game::Game()
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		//error
 	}
-	Game::screen = new Screen("Minesweeper",50,50,640,480);
+	Game::screen = new Screen("Minesweeper",50,50,1600,960);
 	
 }
 

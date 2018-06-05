@@ -22,16 +22,25 @@ void Level::Update(float deltaTime)
 		default:
 			break;
 		case SDLK_w:
+			//check pos
+			
+			Level::player->moveTo(player->xpos, player->ypos - 1);
+			//direction
 			break;
 		case SDLK_a:
+			Level::player->moveTo(player->xpos -1 , player->ypos);
 			break;
 		case SDLK_s:
+			Level::player->moveTo(player->xpos, player->ypos + 1);
 			break;
 		case SDLK_d:
+			Level::player->moveTo(player->xpos +1, player->ypos);
 			break;
 		}
 	}
-	//update
+	
+	//update map
+	
 	//render
 	
 	
