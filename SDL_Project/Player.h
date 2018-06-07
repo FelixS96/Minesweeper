@@ -7,6 +7,7 @@ public:
 	void moveTo(int x, int y);
 	int xpos;
 	int ypos;
+	int hp;
 	~Player();
 };
 

@@ -2,8 +2,9 @@
 class Map
 {
 public:
-	Map();
+	Map(int numb);
 	void createMap();
+	int* mapptr=nullptr;
 	~Map();
 };
 

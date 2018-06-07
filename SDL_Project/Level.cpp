@@ -3,11 +3,11 @@
 
 
 
-Level::Level()
+Level::Level(int num)
 {
 	//create Level
 	//insert Player
-	Level::map = new Map();
+	Level::map = new Map(1);
 	Level::player = new Player(0,0);
 	Level::renderer = new Renderer(/*fenster*/);
 }
@@ -42,6 +42,10 @@ void Level::Update(float deltaTime)
 	//update map
 	
 	//render
+	//draw map
+	//draw numbers
+	//draw cover
+	//draw player
 	
 	
 }

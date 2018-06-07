@@ -11,7 +11,7 @@ private:
 	Player* player;
 	Renderer* renderer;
 public:
-	Level();
+	Level(int num);
 	void Update(float deltaTime);
 	~Level();
 };
