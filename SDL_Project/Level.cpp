@@ -14,6 +14,8 @@ Level::Level(int num)
 
 void Level::Update(float deltaTime)
 {
+	int px = player->xpos;
+	int py = player->ypos;
 	printf("%f", deltaTime);
 	SDL_PollEvent(&e);
 	if (e.type == SDL_KEYDOWN) {
@@ -22,23 +24,26 @@ void Level::Update(float deltaTime)
 		default:
 			break;
 		case SDLK_w:
-			//check pos
-			
-			Level::player->moveTo(player->xpos, player->ypos - 1);
-			//direction
+			py -= 1;
 			break;
 		case SDLK_a:
-			Level::player->moveTo(player->xpos -1 , player->ypos);
+			px -= 1;
 			break;
 		case SDLK_s:
-			Level::player->moveTo(player->xpos, player->ypos + 1);
+			py += 1;
 			break;
 		case SDLK_d:
-			Level::player->moveTo(player->xpos +1, player->ypos);
+			px += 1;
+			/*Level::collide = map->getposdata(player->xpos+1, player->ypos);
+			Level::player->moveTo(player->xpos +1, player->ypos);*/
 			break;
 		}
 	}
-	
+	Level::collide = map->getposdata(px, py);	//check pos
+	if (Level::collide == 0) {
+		Level::player->moveTo(px, py);
+		map->update(px, py);
+	}
 	//update map
 	
 	//render
@@ -53,4 +58,7 @@ void Level::Update(float deltaTime)
 
 Level::~Level()
 {
+	Level::map = nullptr;
+	Level::player = nullptr;
+	Level::renderer = nullptr;
 }

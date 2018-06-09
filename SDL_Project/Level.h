@@ -10,6 +10,7 @@ private:
 	Map* map;
 	Player* player;
 	Renderer* renderer;
+	int collide;
 public:
 	Level(int num);
 	void Update(float deltaTime);
