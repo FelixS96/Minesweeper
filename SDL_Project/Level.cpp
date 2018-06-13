@@ -115,6 +115,7 @@ void Level::Update(float deltaTime)
 	for (int x=0; x< 25; x++) {
 		for (int y=0; y < 10; y++) {
 			int bginfo = *map->bgptr[x][y]/**map->bgptr + x * 10 + y*/;
+			bginfo = *bgptr[x][y];// --------read file
 			rect.x = 50+x*64;
 			rect.y = 50+y*64;
 			if (bginfo == 0) {
