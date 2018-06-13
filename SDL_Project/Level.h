@@ -4,6 +4,7 @@
 #include "Player.h"
 #include <SDL_image.h>
 #include <string>
+#include <vector>
 //#include "Renderer.h"
 class Level
 {
@@ -11,7 +12,6 @@ private:
 	SDL_Event e;
 	Map* map;
 	Player* player;
-	int(*bgptr)[25][10] = nullptr;
 	bool textures;
 	SDL_Texture* Texture1;
 	SDL_Texture* Texture2;

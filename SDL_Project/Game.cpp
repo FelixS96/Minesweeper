@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Player.h"
 #include "Map.h"
-#include "Level.h"
 
 
 enum gamestate { exitgame, splash, startmenu, ingame, gameover };
@@ -16,7 +15,7 @@ Game::Game()
 		//error
 	}
 	//Game::screen = new Screen("Minesweeper",50,50,1900,800);	
-	SDL_Window* window = SDL_CreateWindow("Minesweeper", 50, 50, 1900, 800,SDL_WINDOW_SHOWN); //1750 700 + 100 for border and 50 for hud
+	SDL_Window* window = SDL_CreateWindow("Minesweeper", 50, 50, 1600, 850,SDL_WINDOW_SHOWN); //1600 640 +  hud
 	//Game::screen = window;
 	level->wind(window);
 }

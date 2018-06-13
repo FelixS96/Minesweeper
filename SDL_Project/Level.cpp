@@ -14,35 +14,8 @@ Level::Level(int num)
 	Level::Texture3 = NULL;
 	Level::Texture4 = NULL;
 	Level::Texture5 = NULL;
-	int bg[25][10] = {
-	{ 0,1,3,0,0,0,0,0,0,0 },
-	{ 1,0,1,0,0,0,0,0,0,0 },
-	{ 3,0,1,0,0,0,0,0,0,0 },
-	{ 0,0,0,0,0,0,1,0,0,0 },
-	{ 0,0,1,2,0,0,0,0,0,0 },
-	{ 0,2,2,2,0,1,0,0,0,0 },
-	{ 0,0,0,0,0,0,0,0,0,0 },
-	{ 0,0,0,0,0,0,0,1,0,0 },
-	{ 0,0,0,0,1,0,2,0,0,0 },
-	{ 0,0,0,2,2,0,0,1,0,0 },
-	{ 2,0,0,0,2,0,0,0,0,0 },
-	{ 2,2,2,0,2,2,0,1,0,0 },
-	{ 0,0,1,0,0,0,0,0,0,0 },
-	{ 0,0,0,0,0,0,0,0,0,0 },
-	{ 0,0,0,1,0,0,0,0,0,0 },
-	{ 0,0,2,2,2,0,1,0,0,0 },
-	{ 0,0,0,0,0,0,0,0,0,0 },
-	{ 0,0,0,1,2,0,0,0,0,0 },
-	{ 0,0,2,2,2,0,0,1,0,0 },
-	{ 0,0,2,0,0,1,0,0,0,0 },
-	{ 0,0,1,0,0,0,2,1,0,0 },
-	{ 0,0,0,0,0,2,2,0,1,0 },
-	{ 0,0,0,1,0,0,2,0,0,0 },
-	{ 0,0,0,0,0,0,0,0,0,0 },
-	{ 0,0,0,0,0,0,0,0,0,0 }
-	};
-	bgptr = &bg;
-	SDL_SetRenderDrawColor(Level::renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	
+	
 	this->Gamestate = 1;
 	textures = false;
 	
@@ -67,11 +40,12 @@ SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 void Level::Update(float deltaTime)
 {
 	if (textures == false) {
-		Level::Texture1 = loadTexture("bg1.png", Level::renderer);
-		Level::Texture2 = loadTexture("bg2.png", Level::renderer);
-		Level::Texture3 = loadTexture("bg3.png", Level::renderer);
-		Level::Texture4 = loadTexture("bg4.png", Level::renderer);
-		Level::Texture5 = loadTexture("mine.png", Level::renderer);
+		Texture1 = loadTexture("bg1.png", renderer);
+		Texture2 = loadTexture("bg2.png", renderer);
+		Texture3 = loadTexture("bg3.png", renderer);
+		Texture4 = loadTexture("bg4.png", renderer);
+		Texture5 = loadTexture("mine.png", renderer);
+		Texture6 = loadTexture("char.png", renderer);
 		textures = true;
 	}
 	SDL_Rect rect;
@@ -101,36 +75,76 @@ void Level::Update(float deltaTime)
 		}
 	}else
 	if (e.type == SDL_QUIT) {
-		Level::Gamestate=0;
+		Gamestate=0;
 	}
-	Level::collide = map->getposdata(px, py);	//check pos
-	if (Level::collide == 0) {
-		Level::player->moveTo(px, py);
-		map->update(px, py);
+	if (px != player->xpos || py != player->ypos) {
+		collide = map->getposdata(px, py);	//check pos
+		if (Level::collide == 0) {
+			Level::player->moveTo(px, py);
+			map->update(px, py);
+		}
 	}
 	rect.w = 64;
 	rect.h = 64;
-	SDL_RenderClear(Level::renderer);
+	SDL_RenderClear(renderer);
 	//update map
+	SDL_SetRenderDrawColor(renderer,229 , 218, 220, 255);
 	for (int x=0; x< 25; x++) {
 		for (int y=0; y < 10; y++) {
-			int bginfo = *map->bgptr[x][y]/**map->bgptr + x * 10 + y*/;
-			bginfo = *bgptr[x][y];// --------read file
-			rect.x = 50+x*64;
-			rect.y = 50+y*64;
-			if (bginfo == 0) {
-
+			int bginfo = map->bgptr[x][y]/**map->bgptr + x * 10 + y*/;
+			rect.x = x*64;
+			rect.y = y*64+50;
+			if (bginfo == 3) {
+				SDL_RenderCopy(renderer, Texture3, NULL, &rect);
 			}
 			else if (bginfo == 1) {
-				SDL_RenderCopy(Level::renderer, Level::Texture1, NULL, &rect);
+				SDL_RenderCopy(renderer, Texture1, NULL, &rect);
 			}
 			else if (bginfo == 2) {
-				SDL_RenderCopy(Level::renderer, Level::Texture2, NULL, &rect);
+				SDL_RenderCopy(renderer, Texture3, NULL, &rect);
+				SDL_RenderCopy(renderer, Texture2, NULL, &rect);
+			}else
+				if(bginfo == 4) {
+				SDL_RenderCopy(renderer, Texture4, NULL, &rect);
 			}
 			
 		}
 	}
-	SDL_RenderPresent(Level::renderer);
+	for (int x = 0; x< 25; x++) {
+		for (int y = 0; y < 10; y++) {
+			int mapinfo = map->mapptr[x][y]/**map->bgptr + x * 10 + y*/;
+			rect.x = x * 64;
+			rect.y = y * 64+50;
+			if (mapinfo == 0) {
+				//SDL_RenderCopy(Level::renderer, Level::Texture3, NULL, &rect);
+			}
+			else if (mapinfo == 1) {
+				SDL_RenderCopy(renderer, Texture5, NULL, &rect);
+			}
+			else if (mapinfo == 2) {
+				//SDL_RenderCopy(Level::renderer, Level::Texture2, NULL, &rect);
+			}
+
+		}
+	}
+	for (int x = 0; x< 25; x++) {
+		for (int y = 0; y < 10; y++) {
+			int covinfo = map->covptr[x][y]/**map->bgptr + x * 10 + y*/;
+			rect.x = x * 64;
+			rect.y = y * 64 + 50;
+			if (covinfo == 9) {
+				//SDL_RenderCopy(Level::renderer, Level::Texture3, NULL, &rect); //some cover
+			}
+			else if (covinfo < 9 && covinfo>0) {
+						//numbers
+			}else{/*clear*/}
+
+		}
+	}
+	rect.x = player->xpos*64;
+	rect.y = player->ypos*64+50;
+	SDL_RenderCopy(renderer, Texture6, NULL, &rect);
+	SDL_RenderPresent(renderer);
 
 	//render
 	//draw map

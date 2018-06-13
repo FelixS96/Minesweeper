@@ -1,17 +1,17 @@
 #pragma once
+#include <vector>
 class Map
 {
 private:
 	
 public:
-	int(*bgptr)[25][10] = nullptr;
+	std::vector<std::vector<int>> bgptr;
+	std::vector<std::vector<int>> mapptr;
+	std::vector<std::vector<int>> covptr;
 	Map(int numb);
 	//void createMap();
 	void update(int x, int y);
 	int getposdata(int x, int y);
-	int getbgdata(int x, int y);
-	int* mapptr = nullptr;
-	int* covptr = nullptr;
 	~Map();
 };
 

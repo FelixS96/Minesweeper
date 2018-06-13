@@ -100,5 +100,8 @@
     <Image Include="mine.png">
       <Filter>Source Files\pics</Filter>
     </Image>
+    <Image Include="char.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
   </ItemGroup>
 </Project>
