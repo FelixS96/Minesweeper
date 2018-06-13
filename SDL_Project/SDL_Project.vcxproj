@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{137BED48-1C0C-4B8A-8A11-B38D2AFA4470}</ProjectGuid>
     <RootNamespace>SDL_Project</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,6 +71,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\$(PlatformTarget)\</OutDir>
     <IntDir>bin\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <IncludePath>D:\Meine Dateien\wichtiges\studium\programmieren1\minesweeper\Dependencies\SDL2_image\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Meine Dateien\wichtiges\studium\programmieren1\minesweeper\Dependencies\SDL2_image\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\$(PlatformTarget)\</OutDir>
@@ -190,6 +192,13 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Startmenu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bg1.png" />
+    <Image Include="bg2.png" />
+    <Image Include="bg3.png" />
+    <Image Include="bg4.png" />
+    <Image Include="mine.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

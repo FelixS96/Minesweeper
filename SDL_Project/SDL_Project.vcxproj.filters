@@ -19,6 +19,9 @@
     <Filter Include="Header Files\states">
       <UniqueIdentifier>{397e3e51-5a14-4d04-818d-ea4595b7aa46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\pics">
+      <UniqueIdentifier>{d08c56d7-f105-4df9-af66-113098c4a7ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,5 +83,22 @@
     <ClInclude Include="Startmenu.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bg1.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="bg2.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="bg3.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="bg4.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="mine.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
   </ItemGroup>
 </Project>

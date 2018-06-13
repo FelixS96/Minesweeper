@@ -15,8 +15,10 @@ Game::Game()
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		//error
 	}
-	Game::screen = new Screen("Minesweeper",50,50,1900,800);	//1750 700 + 100 for border and 50 for hud
-	
+	//Game::screen = new Screen("Minesweeper",50,50,1900,800);	
+	SDL_Window* window = SDL_CreateWindow("Minesweeper", 50, 50, 1900, 800,SDL_WINDOW_SHOWN); //1750 700 + 100 for border and 50 for hud
+	//Game::screen = window;
+	level->wind(window);
 }
 
 int Game::GetState()
@@ -42,10 +44,16 @@ void Game::Update(float deltaTime)
 		break;
 	case ingame:
 		level->Update(deltaTime);
+		levelst();
 		break;
 	case gameover:
 		break;
 	}
+}
+
+void Game::levelst()
+{
+	Game::SetState(level->Gamestate);
 }
 
 
