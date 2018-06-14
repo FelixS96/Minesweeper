@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{137BED48-1C0C-4B8A-8A11-B38D2AFA4470}</ProjectGuid>
     <RootNamespace>SDL_Project</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -194,11 +194,24 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClInclude Include="Startmenu.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="0.png" />
+    <Image Include="1.png" />
+    <Image Include="2.png" />
+    <Image Include="3.png" />
+    <Image Include="4.png" />
+    <Image Include="5.png" />
+    <Image Include="6.png" />
+    <Image Include="7.png" />
+    <Image Include="8.png" />
+    <Image Include="9.png" />
     <Image Include="bg1.png" />
     <Image Include="bg2.png" />
     <Image Include="bg3.png" />
     <Image Include="bg4.png" />
     <Image Include="char.png" />
+    <Image Include="cover.png" />
+    <Image Include="hind.png" />
+    <Image Include="hind2.png" />
     <Image Include="mine.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

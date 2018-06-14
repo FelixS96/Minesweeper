@@ -3,23 +3,23 @@
 #include "Player.h"
 #include "Map.h"
 
-
+//different gamestates
 enum gamestate { exitgame, splash, startmenu, ingame, gameover };
+//start in the state ---
 gamestate gamestatus = ingame;
 Level*level = new Level(1);
+
 Game::Game()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)				//initiate SDL
 	{
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		//error
 	}
-	//Game::screen = new Screen("Minesweeper",50,50,1900,800);	
-	SDL_Window* window = SDL_CreateWindow("Minesweeper", 50, 50, 1600, 850,SDL_WINDOW_SHOWN); //1600 640 +  hud
-	//Game::screen = window;
-	level->wind(window);
+	SDL_Window* window = SDL_CreateWindow("Minesweeper", 50, 50, 1600, 950,SDL_WINDOW_SHOWN); //1600 780 +  hud
+	level->wind(window);			//draw in window
 }
-
+//get set state
 int Game::GetState()
 {
 	return State;
@@ -28,7 +28,7 @@ void Game::SetState(int State)
 {
 	this->State = State;
 }
-
+//switch between different modes
 void Game::Update(float deltaTime)
 {
 	

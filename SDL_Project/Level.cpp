@@ -1,33 +1,35 @@
 #include "Level.h"
 #include <iostream>
-
-
-//SDL_Texture* loadTexture(std::string path);
+#define XSIZE 25
+#define YSIZE 12
+#define TEXSIZE 64
+#define TOPOFFSET 30
 Level::Level(int num)
 {
 	//create Level
 	//insert Player
-	Level::map = new Map(num);
-	Level::player = new Player(0,0);
-	Level::Texture1 = NULL;
-	Level::Texture2 = NULL;
-	Level::Texture3 = NULL;
-	Level::Texture4 = NULL;
-	Level::Texture5 = NULL;
+	//Create Textures
+	map = new Map(num);			
+	player = new Player(0,0);
+	Texture1 = NULL;
+	Texture2 = NULL;
+	Texture3 = NULL;
+	Texture4 = NULL;
+	Texture5 = NULL;
 	
-	
+	//Gamestate running
+	//textures not loaded
 	this->Gamestate = 1;
 	textures = false;
 	
-	
 }
 
-
+//create renderer in wind
 void Level::wind(SDL_Window * wind)
 {
 	Level::renderer = SDL_CreateRenderer(wind, -1, SDL_RENDERER_ACCELERATED);
 }
-
+//how to load textures
 SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
@@ -36,32 +38,47 @@ SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 	return newTexture;
 
 }
-
+//used while running
 void Level::Update(float deltaTime)
 {
-	if (textures == false) {
+	if (textures == false) {								//load textures if not loaded
 		Texture1 = loadTexture("bg1.png", renderer);
 		Texture2 = loadTexture("bg2.png", renderer);
 		Texture3 = loadTexture("bg3.png", renderer);
 		Texture4 = loadTexture("bg4.png", renderer);
 		Texture5 = loadTexture("mine.png", renderer);
 		Texture6 = loadTexture("char.png", renderer);
-		textures = true;
+		Texture7 = loadTexture("hind.png", renderer);
+		Texture8 = loadTexture("hind2.png", renderer);
+		Texture9 = loadTexture("cover.png", renderer);
+		Texture10 = loadTexture("0.png", renderer);
+		Texture11 = loadTexture("1.png", renderer);
+		Texture12 = loadTexture("2.png", renderer);
+		Texture13 = loadTexture("3.png", renderer);
+		Texture14 = loadTexture("4.png", renderer);
+		Texture15 = loadTexture("5.png", renderer);
+		Texture16 = loadTexture("6.png", renderer);
+		Texture17 = loadTexture("7.png", renderer);
+		Texture18 = loadTexture("8.png", renderer);
+		Texture19 = loadTexture("9.png", renderer);
+		textures = true;									//textures loaded
 	}
+	//target rect for rendering tasks
 	SDL_Rect rect;
+
+	//get player position
 	int px = player->xpos;
 	int py = player->ypos;
 	printf("%f", deltaTime);
-
+	//read eventdata
 	SDL_PollEvent(&e);
-	if (e.type == SDL_QUIT) {
+	if (e.type == SDL_QUIT) {				//exit button
 		Gamestate=0;
-	}else if (e.type == SDL_KEYDOWN) {
+	}else if (e.type == SDL_KEYDOWN) {		//keys used
 		switch (e.key.keysym.sym)
-		{		
+		{									//different keys move the player pos
 		case SDLK_w:
 			py -= 1;
-			printf("ha");
 			break;
 		case SDLK_a:
 			px -= 1;
@@ -71,36 +88,39 @@ void Level::Update(float deltaTime)
 			break;
 		case SDLK_d:
 			px += 1;
-			/*Level::collide = map->getposdata(player->xpos+1, player->ypos);
-			Level::player->moveTo(player->xpos +1, player->ypos);*/
 			break;
 		default:
 			break;
 		}
 	}
 	
-	if (px != player->xpos || py != player->ypos) {
-		collide = map->getposdata(px, py);	//check pos
-		if (collide == 0) {
-			Level::player->moveTo(px, py);
-			map->update(px, py);
+	if (px != player->xpos || py != player->ypos) {			//check if position changed by keydown
+		collide = map->getposdata(px, py);					//check pos
+		if (collide == 0) {									//if no collision
+			player->moveTo(px, py);							//move player to
+			map->update(px, py);							//update visible areas
 		}
-		else if (collide == 3) {
-			player->moveTo(px, py);
-			map->update(px, py);
-			player->hp -= 1;
+		else if (collide == 3) {							//check if player hit a mine
+			player->moveTo(px, py);							//move player to 
+			map->update(px, py);							//update visible areas
+			player->hp -= 1;								//player steped on a mine and lost hp
 		}
 	}
+	//set rect size
 	rect.w = 64;
 	rect.h = 64;
+	//clear renderer
 	SDL_RenderClear(renderer);
-	//update map
+	//draw background color
 	SDL_SetRenderDrawColor(renderer,229 , 218, 220, 255);
-	for (int x=0; x< 25; x++) {
-		for (int y=0; y < 10; y++) {
-			int bginfo = map->bgptr[x][y]/**map->bgptr + x * 10 + y*/;
-			rect.x = x*64;
-			rect.y = y*64+50;
+	//background
+	//check each position in the map to draw the right textures
+	for (int x=0; x< XSIZE; x++) {
+		for (int y=0; y < YSIZE; y++) {
+			int bginfo = map->bgptr[x][y];
+			//set target area for background texture
+			rect.x = x* TEXSIZE;
+			rect.y = y* TEXSIZE + TOPOFFSET;
 			if (bginfo == 3) {
 				SDL_RenderCopy(renderer, Texture3, NULL, &rect);
 			}
@@ -117,11 +137,14 @@ void Level::Update(float deltaTime)
 			
 		}
 	}
-	for (int x = 0; x< 25; x++) {
-		for (int y = 0; y < 10; y++) {
-			int mapinfo = map->mapptr[x][y]/**map->bgptr + x * 10 + y*/;
-			rect.x = x * 64;
-			rect.y = y * 64+50;
+	//content
+	//check each position in the map to draw the right textures
+	for (int x = 0; x< XSIZE; x++) {
+		for (int y = 0; y < YSIZE; y++) {
+			int mapinfo = map->mapptr[x][y];
+			//set target area for content texture
+			rect.x = x * TEXSIZE;
+			rect.y = y * TEXSIZE + TOPOFFSET;
 			if (mapinfo == 0) {
 				//SDL_RenderCopy(Level::renderer, Level::Texture3, NULL, &rect);
 			}
@@ -129,18 +152,25 @@ void Level::Update(float deltaTime)
 				SDL_RenderCopy(renderer, Texture5, NULL, &rect);
 			}
 			else if (mapinfo == 2) {
-				//SDL_RenderCopy(Level::renderer, Level::Texture2, NULL, &rect);
+
+				SDL_RenderCopy(renderer, Texture7, NULL, &rect);
+			}
+			else if (mapinfo == 3) {
+				SDL_RenderCopy(renderer, Texture8, NULL, &rect);
 			}
 
 		}
 	}
-	for (int x = 0; x< 25; x++) {
-		for (int y = 0; y < 10; y++) {
-			int covinfo = map->covptr[x][y]/**map->bgptr + x * 10 + y*/;
-			rect.x = x * 64;
-			rect.y = y * 64 + 50;
+	//covering (visible area and numbers)
+	//check each position in the map to draw the right textures
+	for (int x = 0; x< XSIZE; x++) {
+		for (int y = 0; y < YSIZE; y++) {
+			int covinfo = map->covptr[x][y];
+			//set target area for content texture
+			rect.x = x * TEXSIZE;
+			rect.y = y * TEXSIZE + TOPOFFSET;
 			if (covinfo == 9) {
-				//SDL_RenderCopy(Level::renderer, Level::Texture3, NULL, &rect); //some cover
+				SDL_RenderCopy(renderer, Texture9, NULL, &rect); //some cover
 			}
 			else if (covinfo < 9 && covinfo>0) {
 						//numbers
@@ -148,9 +178,11 @@ void Level::Update(float deltaTime)
 
 		}
 	}
-	rect.x = player->xpos*64;
-	rect.y = player->ypos*64+50;
+	//target area for player
+	rect.x = player->xpos * TEXSIZE;
+	rect.y = player->ypos * TEXSIZE + TOPOFFSET;
 	SDL_RenderCopy(renderer, Texture6, NULL, &rect);
+	//show renderer
 	SDL_RenderPresent(renderer);
 
 	//render
@@ -161,6 +193,7 @@ void Level::Update(float deltaTime)
 	
 	
 }
+
 
 
 Level::~Level()
