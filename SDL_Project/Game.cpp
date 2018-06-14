@@ -31,8 +31,8 @@ void Game::SetState(int State)
 
 void Game::Update(float deltaTime)
 {
-	SDL_PollEvent(&e);
-	if (e.type == SDL_QUIT) {
+	
+	if (level->Gamestate==0) {
 		SetState(0);
 	}
 	switch (gamestatus) {
@@ -43,16 +43,10 @@ void Game::Update(float deltaTime)
 		break;
 	case ingame:
 		level->Update(deltaTime);
-		levelst();
 		break;
 	case gameover:
 		break;
 	}
-}
-
-void Game::levelst()
-{
-	Game::SetState(level->Gamestate);
 }
 
 

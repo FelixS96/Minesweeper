@@ -52,14 +52,16 @@ void Level::Update(float deltaTime)
 	int px = player->xpos;
 	int py = player->ypos;
 	printf("%f", deltaTime);
+
 	SDL_PollEvent(&e);
-	if (e.type == SDL_KEYDOWN) {
+	if (e.type == SDL_QUIT) {
+		Gamestate=0;
+	}else if (e.type == SDL_KEYDOWN) {
 		switch (e.key.keysym.sym)
-		{
-		default:
-			break;
+		{		
 		case SDLK_w:
 			py -= 1;
+			printf("ha");
 			break;
 		case SDLK_a:
 			px -= 1;
@@ -72,16 +74,21 @@ void Level::Update(float deltaTime)
 			/*Level::collide = map->getposdata(player->xpos+1, player->ypos);
 			Level::player->moveTo(player->xpos +1, player->ypos);*/
 			break;
+		default:
+			break;
 		}
-	}else
-	if (e.type == SDL_QUIT) {
-		Gamestate=0;
 	}
+	
 	if (px != player->xpos || py != player->ypos) {
 		collide = map->getposdata(px, py);	//check pos
-		if (Level::collide == 0) {
+		if (collide == 0) {
 			Level::player->moveTo(px, py);
 			map->update(px, py);
+		}
+		else if (collide == 3) {
+			player->moveTo(px, py);
+			map->update(px, py);
+			player->hp -= 1;
 		}
 	}
 	rect.w = 64;

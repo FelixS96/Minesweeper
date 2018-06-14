@@ -103,7 +103,7 @@ void Map::update(int x, int y)
 int Map::getposdata(int x, int y)
 {
 	int returnstate;
-	if (x < 0 || x>25 || y < 0 || y>10) {	//check for accessable area
+	if (x < 0 || x>24 || y < 0 || y>9-2) {	//check for accessable area
 		returnstate = 1;
 	}else
 	if (mapptr[x][y]== 2) {	//check for walls

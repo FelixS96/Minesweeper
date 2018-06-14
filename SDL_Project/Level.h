@@ -9,7 +9,7 @@
 class Level
 {
 private:
-	SDL_Event e;
+	
 	Map* map;
 	Player* player;
 	bool textures;
@@ -23,6 +23,7 @@ private:
 	//Renderer* renderer;
 	int collide;
 public:
+	SDL_Event e;
 	int Gamestate;
 	SDL_Renderer* renderer;
 	Level(int num);
