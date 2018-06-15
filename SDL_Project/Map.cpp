@@ -94,25 +94,29 @@ Map::Map(int numb)
 
 	}
 }
-
+int Map::checkpos(int x, int y)
+{
+	int returnstate;
+	if (x == 0 || x==24 || y == 0 || y==(11 - 2)) {	//check for accessable area
+		returnstate = 1;
+	}
+	return returnstate;
+}
 void Map::update(int x, int y)				//change
 {
 	covptr[x][y]=0;
-	if(x)//sie
-	if (mapptr[x][y + 1] == 2) {
-		covptr[x][y + 1]=0;
-	}
-	if (mapptr[x][y - 1] == 2) {
-		covptr[x][y - 1] = 0;
-	}
-	covptr[x][y-1];
-	covptr[x + 1][y];
-	covptr[x + 1][y + 1];
-	covptr[x + 1][y - 1];
-	covptr[x - 1][y];
-	covptr[x - 1][y + 1];
-	covptr[x - 1][y - 1];
+	if(checkpos(x,y)==1)
+	checkpos(x, y + 1);
+	checkpos(x, y - 1);
 
+	checkpos(x+1, y);
+	checkpos(x+1, y + 1);
+	checkpos(x+1, y - 1);
+
+	checkpos(x-1, y);
+	checkpos(x-1, y + 1);
+	checkpos(x-1, y - 1);
+	
 }
 
 int Map::getposdata(int x, int y)
@@ -133,6 +137,8 @@ int Map::getposdata(int x, int y)
 	}
 		return returnstate;
 }
+
+
 
 
 

@@ -12,6 +12,7 @@ public:
 	//void createMap();
 	void update(int x, int y);
 	int getposdata(int x, int y);
+	int checkpos(int x, int y);
 	~Map();
 };
 
