@@ -94,29 +94,65 @@ Map::Map(int numb)
 
 	}
 }
-int Map::checkpos(int x, int y)
+void Map::checkcoords(int x, int y)
 {
-	int returnstate;
-	if (x == 0 || x==24 || y == 0 || y==(11 - 2)) {	//check for accessable area
-		returnstate = 1;
+	if (x == 0) {
+		left = true;
 	}
-	return returnstate;
+	if (x == 24) {
+		right = true;
+	}
+	if (y == 0) {
+		up = true;
+	}
+	if (y == 9) {
+		down = true;
+	}
 }
+void Map::checkpos(int x, int y)
+{
+	//int returnstate;
+	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 0)&&covptr[x][y]==9) {
+		covptr[x][y] = 0;
+	}
+	//return returnstate;
+}
+
 void Map::update(int x, int y)				//change
 {
-	covptr[x][y]=0;
-	if(checkpos(x,y)==1)
-	checkpos(x, y + 1);
-	checkpos(x, y - 1);
+	left = false;
+	right = false;
+	up = false;
+	down = false;
+	checkcoords(x, y);
+	if (covptr[x][y] == 9) {
+		covptr[x][y] = 0;
+	}
+	if (down == false) {
+		checkpos(x, y + 1);
+	}
+	if (up == false) {
+		checkpos(x, y - 1);
+	}
 
-	checkpos(x+1, y);
-	checkpos(x+1, y + 1);
-	checkpos(x+1, y - 1);
-
-	checkpos(x-1, y);
-	checkpos(x-1, y + 1);
-	checkpos(x-1, y - 1);
-	
+	if (right == false) {
+		checkpos(x + 1, y);
+		if (down == false) {
+			checkpos(x + 1, y + 1);
+		}
+		if (up == false) {
+			checkpos(x + 1, y - 1);
+		}
+	}
+	if (left == false) {
+		checkpos(x - 1, y);
+		if (down == false) {
+			checkpos(x - 1, y + 1);
+		}
+		if (up == false) {
+			checkpos(x - 1, y - 1);
+		}
+	}
 }
 
 int Map::getposdata(int x, int y)

@@ -70,6 +70,9 @@ void Level::Update(float deltaTime)
 	int px = player->xpos;
 	int py = player->ypos;
 	printf("%f", deltaTime);
+	if (map->covptr[px][py] == 9) {
+		map->update(px, py);
+	}
 	//read eventdata
 	SDL_PollEvent(&e);
 	if (e.type == SDL_QUIT) {				//exit button
@@ -93,7 +96,7 @@ void Level::Update(float deltaTime)
 			break;
 		}
 	}
-	
+
 	if (px != player->xpos || py != player->ypos) {			//check if position changed by keydown
 		collide = map->getposdata(px, py);					//check pos
 		if (collide == 0) {									//if no collision

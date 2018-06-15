@@ -12,7 +12,13 @@ public:
 	//void createMap();
 	void update(int x, int y);
 	int getposdata(int x, int y);
-	int checkpos(int x, int y);
+	void checkpos(int x, int y);
+	void checkcoords(int x, int y);
+	bool left;
+	bool right;
+	bool up;
+	bool down;
+
 	~Map();
 };
 
