@@ -171,27 +171,25 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fullscreenimage.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameover.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="Splash.cpp" />
     <ClCompile Include="Startmenu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fullscreenimage.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameover.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Screen.h" />
-    <ClInclude Include="Splash.h" />
     <ClInclude Include="Startmenu.h" />
   </ItemGroup>
   <ItemGroup>

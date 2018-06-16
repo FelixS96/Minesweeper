@@ -88,13 +88,65 @@ Map::Map(int numb)
 		};
 	}
 	else if (numb == 2) {					//map 2
-
+		mapptr = {							
+			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,3,3,3,10,10,10,10 },
+			{ 10,10,10,1,10,10,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,10,3,3,1,10,10,10 },
+			{ 10,10,10,1,2,10,10,10,10,10,10,10 },
+			{ 10,2,10,2,2,10,10,1,10,10,10,10 },
+			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
+			{ 10,10,4,10,10,10,10,10,10,1,10,10 },
+			{ 10,10,10,10,10,10,1,10,2,10,10,10 },
+			{ 10,10,10,10,2,10,2,10,3,1,10,10 },
+			{ 2,10,10,10,10,10,2,10,10,10,10,10 },
+			{ 2,2,10,2,10,10,2,2,10,1,10,10 },
+			{ 10,10,10,1,10,10,10,10,10,10,10,10 },
+			{ 10,3,3,3,10,10,10,10,10,3,10,10 },
+			{ 10,10,10,10,1,10,10,10,10,10,10,10 },
+			{ 10,10,10,2,2,10,2,10,1,10,10,10 },
+			{ 10,10,10,10,10,10,10,10,10,3,10,10 },
+			{ 10,10,10,10,1,10,2,10,10,10,10,10 },
+			{ 10,10,10,2,2,10,2,10,10,1,10,10 },
+			{ 10,10,10,2,10,10,10,1,10,10,10,10 },
+			{ 10,10,10,1,10,10,10,10,2,1,10,10 },
+			{ 10,10,10,10,10,10,10,2,2,10,10,10 },
+			{ 10,10,10,10,1,10,10,10,2,10,10,10 },
+			{ 10,10,10,10,10,1,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,19,10,10,10,10,10,10 }
+		};
 	}
 	else if (numb == 3) {					//map 3
-
+		mapptr = {							
+			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,3,3,3,10,10,10,10 },
+			{ 10,10,10,1,10,10,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,10,3,3,1,10,10,10 },
+			{ 10,10,10,1,2,10,10,10,10,10,10,10 },
+			{ 10,2,10,2,2,10,10,1,10,10,10,10 },
+			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
+			{ 10,10,4,10,10,10,10,10,10,1,10,10 },
+			{ 10,10,10,10,10,10,1,10,2,10,10,10 },
+			{ 10,10,10,10,2,10,2,10,3,1,10,10 },
+			{ 2,10,10,10,10,10,2,10,10,10,10,10 },
+			{ 2,2,10,2,10,10,2,2,10,1,10,10 },
+			{ 10,10,10,1,10,10,10,10,10,10,10,10 },
+			{ 10,3,3,3,10,10,10,10,10,3,10,10 },
+			{ 10,10,10,10,1,10,10,10,10,10,10,10 },
+			{ 10,10,10,2,2,10,2,10,1,10,10,10 },
+			{ 10,10,10,10,10,10,10,10,10,3,10,10 },
+			{ 10,10,10,10,1,10,2,10,10,10,10,10 },
+			{ 10,10,10,2,2,10,2,10,10,1,10,10 },
+			{ 10,10,10,2,10,10,10,1,10,10,10,10 },
+			{ 10,10,10,1,10,10,10,10,2,1,10,10 },
+			{ 10,10,10,10,10,10,10,2,2,10,10,10 },
+			{ 10,10,10,10,1,10,10,10,2,10,10,10 },
+			{ 10,10,10,10,10,1,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,19,10,10,10,10,10,10 }
+		};
 	}
 }
-void Map::checkcoords(int x, int y)
+void Map::checkcoords(int x, int y)		//check if positioned on the border
 {
 	if (x == 0) {
 		left = true;
@@ -109,7 +161,7 @@ void Map::checkcoords(int x, int y)
 		down = true;
 	}
 }
-void Map::addnumbers()
+void Map::addnumbers()					//add numbers around the mines in mapptr
 {
 	for (int x = 0; x < 25; x++) {
 		for (int y = 0; y < 10; y++) {
@@ -165,13 +217,16 @@ void Map::addnumbers()
 		}
 	}
 }
-void Map::checkpos(int x, int y,int xo, int yo)
+void Map::checkpos(int x, int y,int xo, int yo)				//uncover x y while standing at xo yo
 {
 	//int returnstate;
-	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 10|| mapptr[x][y] == 4)&&covptr[x][y]==9) {
+	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 10|| mapptr[x][y] == 4)&&covptr[x][y]==9) {		//uncover if walls, nothing or food and not uncovered
 		covptr[x][y] = 10;
 	}
-	else if (mapptr[x][y] > 10 && mapptr[xo][yo] == 10) {
+	else if (mapptr[x][y] > 10 && mapptr[xo][yo] == 10) {		//uncover if standing on no number and target is a number
+		covptr[x][y] = 10;
+	}
+	else if (mapptr[x][y] == 19) {								//uncover if target in position
 		covptr[x][y] = 10;
 	}
 	//return returnstate;
@@ -220,14 +275,14 @@ void Map::update(int x, int y)				//change
 int Map::getposdata(int x, int y)
 {
 	int returnstate;
-	if (x < 0 || x>24 || y < 0 || y>11-2) {	//check for accessable area
+	if (x < 0 || x>24 || y < 0 || y>11-2) {								//check for accessable area
 		returnstate = 1;
 	}else
-	if (mapptr[x][y]== 2|| mapptr[x][y] == 3) {	//check for walls
+	if (mapptr[x][y]== 2|| mapptr[x][y] == 3) {							//check for walls
 		returnstate = 2;
 	}else 
-	if(mapptr[x][y]== 1) {	//check for mines
-		mapptr[x][y] = 0;	//delete mine you stepped on
+	if(mapptr[x][y]== 1) {												//check for mines
+		mapptr[x][y] = 0;												//delete mine you stepped on
 		if (covptr[x][y] == 11) {
 			covptr[x][y] = 10;
 		}
@@ -235,9 +290,8 @@ int Map::getposdata(int x, int y)
 		right = false;
 		up = false;
 		down = false;
-		
 		checkcoords(x, y);
-		//lower numbers around bom that got destroyed
+		//lower numbers around mine that got destroyed
 		if (down == false) {
 			if (mapptr[x][y + 1] > 9&& mapptr[x][y + 1] < 18) {
 				mapptr[x][y + 1] -= 1;
@@ -282,11 +336,11 @@ int Map::getposdata(int x, int y)
 		}
 		returnstate = 3;
 	}
-	else if (mapptr[x][y] == 4) {	//check for mines
+	else if (mapptr[x][y] == 4) {	//check for collision with mines
 		mapptr[x][y] = 0;
 		returnstate = 5;
 	}
-	else if (mapptr[x][y] == 19) {
+	else if (mapptr[x][y] == 19) {	//check for collision with food
 		returnstate = 4;
 	}
 	else {

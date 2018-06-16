@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include "Screen.h"
 
-
+//create a window
 Screen::Screen(char * WindowName, int PosX, int PosY, int Width, int Height)
 {
 	this->Name = WindowName;

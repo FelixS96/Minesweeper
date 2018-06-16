@@ -39,19 +39,16 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Gameover.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
-    <ClCompile Include="Splash.cpp">
+    <ClCompile Include="Startmenu.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
-    <ClCompile Include="Startmenu.cpp">
+    <ClCompile Include="fullscreenimage.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,16 +65,10 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Gameover.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Header Files\states</Filter>
-    </ClInclude>
-    <ClInclude Include="Splash.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
     <ClInclude Include="Startmenu.h">
@@ -85,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fullscreenimage.h">
+      <Filter>Header Files\states</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

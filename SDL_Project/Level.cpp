@@ -17,14 +17,9 @@ Level::Level(int num)
 	//textures not loaded
 	this->Gamestate = 1;
 	textures = false;
-	
+	finished = false;
 }
 
-//create renderer in wind
-void Level::wind(SDL_Window * wind)
-{
-	renderer = SDL_CreateRenderer(wind, -1, SDL_RENDERER_ACCELERATED);
-}
 //how to load textures
 SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 	SDL_Texture* newTexture = NULL;
@@ -35,7 +30,7 @@ SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 
 }
 //used while running
-void Level::Update(float deltaTime)
+void Level::Update(float deltaTime, SDL_Renderer* renderer)
 {
 
 	if (textures == false) {								//load textures if not loaded
@@ -132,10 +127,10 @@ void Level::Update(float deltaTime)
 			map->update(px, py);							//update visible areas
 			player->hp -= 1;								//player steped on a mine and lost hp
 		}
-		else if (collide == 5) {							//check if player hit a mine
+		else if (collide == 5) {							//check if player hit food
 			player->moveTo(px, py);							//move player to 
 			map->update(px, py);							//update visible areas
-			player->hp += 1;								//player steped on a mine and lost hp
+			player->hp += 1;								//player steped on food and got hp
 		}
 		else if (collide == 4) {
 			player->moveTo(px, py);
@@ -145,6 +140,8 @@ void Level::Update(float deltaTime)
 					map->covptr[x][y] = 0;
 				}
 			}
+			finished = true;
+			Gamestate = 2;
 		}
 	}
 	//set rect size
@@ -255,14 +252,6 @@ void Level::Update(float deltaTime)
 
 	//show renderer
 	SDL_RenderPresent(renderer);
-
-	//render
-	//draw map
-	//draw numbers
-	//draw cover
-	//draw player
-	
-	
 }
 
 
@@ -271,5 +260,4 @@ Level::~Level()
 {
 	Level::map = nullptr;
 	Level::player = nullptr;
-	Level::renderer = nullptr;
 }

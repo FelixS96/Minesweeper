@@ -7,15 +7,16 @@ class Startmenu
 private:
 	bool textures;
 	SDL_Texture * Texture1;
-	bool mouseup;
+	SDL_Texture * Texture2;
 public:
+	bool mouseup;
 	SDL_Event e;
 	int Gamestate;
-	SDL_Renderer* renderer;
 	SDL_Texture* loadTexture(std::string path, SDL_Renderer* renderer);
-	void wind(SDL_Window* wind);		//create a renderer in wind
 	Startmenu();
-	void once();
+	void once(SDL_Renderer* renderer);
+	void update(SDL_Renderer* renderer);
+	int selected;
 	~Startmenu();
 };
 

@@ -5,7 +5,6 @@
 #include <SDL_image.h>
 #include <string>
 #include <vector>
-//#include "Renderer.h"
 class Level
 {
 private:
@@ -36,16 +35,15 @@ private:
 	SDL_Texture* Texture20;
 	SDL_Texture* Texture21;
 	bool mouseup;
+	SDL_Event e;				//events
 	//collision modes
 	int collide;
 public:
-	SDL_Event e;						//events
+	bool finished;						//is the lvl won
 	int Gamestate;						//gamestate (exitcondition)
-	SDL_Renderer* renderer;				//renderer
 	Level(int num);						//create map number
 	SDL_Texture* loadTexture(std::string path, SDL_Renderer* renderer);
-	void wind(SDL_Window* wind);		//create a renderer in wind
-	void Update(float deltaTime);		//repeatedly used function
+	void Update(float deltaTime,SDL_Renderer* renderer);		//repeatedly used function
 	~Level();
 };
 
