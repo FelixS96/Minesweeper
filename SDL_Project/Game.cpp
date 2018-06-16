@@ -31,10 +31,11 @@ void Game::SetState(int State)
 //switch between different modes
 void Game::Update(float deltaTime)
 {
-	
-	if (level->Gamestate==0) {
+	//if window closed ingame
+	if (level->Gamestate==0) {	
 		SetState(0);
 	}
+	//update active gamestate
 	switch (gamestatus) {
 	default:
 	case splash:

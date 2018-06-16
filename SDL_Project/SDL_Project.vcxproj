@@ -194,7 +194,6 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClInclude Include="Startmenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="0.png" />
     <Image Include="1.png" />
     <Image Include="2.png" />
     <Image Include="3.png" />
@@ -203,7 +202,6 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="6.png" />
     <Image Include="7.png" />
     <Image Include="8.png" />
-    <Image Include="9.png" />
     <Image Include="bg1.png" />
     <Image Include="bg2.png" />
     <Image Include="bg3.png" />

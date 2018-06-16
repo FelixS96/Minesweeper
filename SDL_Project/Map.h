@@ -12,8 +12,9 @@ public:
 	//void createMap();
 	void update(int x, int y);
 	int getposdata(int x, int y);
-	void checkpos(int x, int y);
+	void checkpos(int x, int y, int xo, int yo);
 	void checkcoords(int x, int y);
+	void addnumbers();
 	bool left;
 	bool right;
 	bool up;

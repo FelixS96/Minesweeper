@@ -103,9 +103,6 @@
     <Image Include="char.png">
       <Filter>Source Files\pics</Filter>
     </Image>
-    <Image Include="0.png">
-      <Filter>Source Files\pics</Filter>
-    </Image>
     <Image Include="1.png">
       <Filter>Source Files\pics</Filter>
     </Image>
@@ -128,9 +125,6 @@
       <Filter>Source Files\pics</Filter>
     </Image>
     <Image Include="8.png">
-      <Filter>Source Files\pics</Filter>
-    </Image>
-    <Image Include="9.png">
       <Filter>Source Files\pics</Filter>
     </Image>
     <Image Include="hind.png">

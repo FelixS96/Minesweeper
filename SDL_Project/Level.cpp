@@ -9,7 +9,8 @@ Level::Level(int num)
 	//create Level
 	//insert Player
 	//Create Textures
-	map = new Map(num);			
+	map = new Map(num);	
+	map->addnumbers();
 	player = new Player(0,0);
 	Texture1 = NULL;
 	Texture2 = NULL;
@@ -51,7 +52,6 @@ void Level::Update(float deltaTime)
 		Texture7 = loadTexture("hind.png", renderer);
 		Texture8 = loadTexture("hind2.png", renderer);
 		Texture9 = loadTexture("cover.png", renderer);
-		Texture10 = loadTexture("0.png", renderer);
 		Texture11 = loadTexture("1.png", renderer);
 		Texture12 = loadTexture("2.png", renderer);
 		Texture13 = loadTexture("3.png", renderer);
@@ -60,7 +60,6 @@ void Level::Update(float deltaTime)
 		Texture16 = loadTexture("6.png", renderer);
 		Texture17 = loadTexture("7.png", renderer);
 		Texture18 = loadTexture("8.png", renderer);
-		Texture19 = loadTexture("9.png", renderer);
 		textures = true;									//textures loaded
 	}
 	//target rect for rendering tasks
@@ -161,7 +160,30 @@ void Level::Update(float deltaTime)
 			else if (mapinfo == 3) {
 				SDL_RenderCopy(renderer, Texture8, NULL, &rect);
 			}
-
+			else if (mapinfo == 11) {
+				SDL_RenderCopy(renderer, Texture11, NULL, &rect);
+			}
+			else if (mapinfo == 12) {
+				SDL_RenderCopy(renderer, Texture12, NULL, &rect);
+			}
+			else if (mapinfo == 13) {
+				SDL_RenderCopy(renderer, Texture13, NULL, &rect);
+			}
+			else if (mapinfo == 14) {
+				SDL_RenderCopy(renderer, Texture14, NULL, &rect);
+			}
+			else if (mapinfo == 15) {
+				SDL_RenderCopy(renderer, Texture15, NULL, &rect);
+			}
+			else if (mapinfo == 16) {
+				SDL_RenderCopy(renderer, Texture16, NULL, &rect);
+			}
+			else if (mapinfo == 17) {
+				SDL_RenderCopy(renderer, Texture17, NULL, &rect);
+			}
+			else if (mapinfo == 18) {
+				SDL_RenderCopy(renderer, Texture18, NULL, &rect);
+			}
 		}
 	}
 	//covering (visible area and numbers)
@@ -174,9 +196,6 @@ void Level::Update(float deltaTime)
 			rect.y = y * TEXSIZE + TOPOFFSET;
 			if (covinfo == 9) {
 				SDL_RenderCopy(renderer, Texture9, NULL, &rect); //some cover
-			}
-			else if (covinfo < 9 && covinfo>0) {
-						//numbers
 			}else{/*clear*/}
 
 		}
@@ -185,6 +204,7 @@ void Level::Update(float deltaTime)
 	rect.x = player->xpos * TEXSIZE;
 	rect.y = player->ypos * TEXSIZE + TOPOFFSET;
 	SDL_RenderCopy(renderer, Texture6, NULL, &rect);
+
 	//show renderer
 	SDL_RenderPresent(renderer);
 
