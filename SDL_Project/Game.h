@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "Screen.h"
 #include "Level.h"
+#include "Startmenu.h"
 class Game
 {
 private:

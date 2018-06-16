@@ -83,6 +83,9 @@
     <ClInclude Include="Startmenu.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="bg1.png">
@@ -136,5 +139,37 @@
     <Image Include="cover.png">
       <Filter>Source Files\pics</Filter>
     </Image>
+    <Image Include="target.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="minemaybe.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="credits.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="food.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="menu.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="title.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="help.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="char.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SDL_Project.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

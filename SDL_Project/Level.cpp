@@ -12,11 +12,6 @@ Level::Level(int num)
 	map = new Map(num);	
 	map->addnumbers();
 	player = new Player(0,0);
-	Texture1 = NULL;
-	Texture2 = NULL;
-	Texture3 = NULL;
-	Texture4 = NULL;
-	Texture5 = NULL;
 	
 	//Gamestate running
 	//textures not loaded
@@ -28,7 +23,7 @@ Level::Level(int num)
 //create renderer in wind
 void Level::wind(SDL_Window * wind)
 {
-	Level::renderer = SDL_CreateRenderer(wind, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(wind, -1, SDL_RENDERER_ACCELERATED);
 }
 //how to load textures
 SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
@@ -42,6 +37,7 @@ SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 //used while running
 void Level::Update(float deltaTime)
 {
+
 	if (textures == false) {								//load textures if not loaded
 		Texture1 = loadTexture("bg1.png", renderer);
 		Texture2 = loadTexture("bg2.png", renderer);
@@ -60,6 +56,9 @@ void Level::Update(float deltaTime)
 		Texture16 = loadTexture("6.png", renderer);
 		Texture17 = loadTexture("7.png", renderer);
 		Texture18 = loadTexture("8.png", renderer);
+		Texture19 = loadTexture("target.png", renderer);
+		Texture20 = loadTexture("minemaybe.png", renderer);
+		Texture21 = loadTexture("food.png", renderer);
 		textures = true;									//textures loaded
 	}
 	//target rect for rendering tasks
@@ -68,7 +67,10 @@ void Level::Update(float deltaTime)
 	//get player position
 	int px = player->xpos;
 	int py = player->ypos;
-	printf("%f", deltaTime);
+	//mouse position
+	int mx;
+	int my;
+	//printf("%f", deltaTime);
 	if (map->covptr[px][py] == 9) {
 		map->update(px, py);
 	}
@@ -95,6 +97,29 @@ void Level::Update(float deltaTime)
 			break;
 		}
 	}
+	else if (e.type == SDL_MOUSEBUTTONDOWN) {
+		if (e.button.button==SDL_BUTTON_LEFT&&mouseup==false) {
+			SDL_GetMouseState(&mx, &my);
+			if (my < 781) {
+				mx /= TEXSIZE;
+				my=(my-TOPOFFSET)/TEXSIZE;
+			}
+			if (map->covptr[mx][my] == 9) {
+				map->covptr[mx][my] = 11;
+			}
+			else if (map->covptr[mx][my] == 11) {
+				map->covptr[mx][my] = 9;
+			}
+			printf("klick %i %i",mx,my);
+			mouseup = true;
+		}
+	}
+	else if (e.type == SDL_MOUSEBUTTONUP) {
+		if (e.button.button == SDL_BUTTON_LEFT&&mouseup==true) {
+			printf("loslassen");
+			mouseup = false;
+		}
+	}
 
 	if (px != player->xpos || py != player->ypos) {			//check if position changed by keydown
 		collide = map->getposdata(px, py);					//check pos
@@ -106,6 +131,20 @@ void Level::Update(float deltaTime)
 			player->moveTo(px, py);							//move player to 
 			map->update(px, py);							//update visible areas
 			player->hp -= 1;								//player steped on a mine and lost hp
+		}
+		else if (collide == 5) {							//check if player hit a mine
+			player->moveTo(px, py);							//move player to 
+			map->update(px, py);							//update visible areas
+			player->hp += 1;								//player steped on a mine and lost hp
+		}
+		else if (collide == 4) {
+			player->moveTo(px, py);
+			//------------------------------------popup
+			for (int x = 0; x < XSIZE; x++) {
+				for (int y = 0; y < YSIZE; y++) {
+					map->covptr[x][y] = 0;
+				}
+			}
 		}
 	}
 	//set rect size
@@ -132,8 +171,7 @@ void Level::Update(float deltaTime)
 			else if (bginfo == 2) {
 				SDL_RenderCopy(renderer, Texture3, NULL, &rect);
 				SDL_RenderCopy(renderer, Texture2, NULL, &rect);
-			}else
-				if(bginfo == 4) {
+			}else if(bginfo == 4) {
 				SDL_RenderCopy(renderer, Texture4, NULL, &rect);
 			}
 			
@@ -160,6 +198,9 @@ void Level::Update(float deltaTime)
 			else if (mapinfo == 3) {
 				SDL_RenderCopy(renderer, Texture8, NULL, &rect);
 			}
+			else if (mapinfo == 4) {
+				SDL_RenderCopy(renderer, Texture21, NULL, &rect);
+			}
 			else if (mapinfo == 11) {
 				SDL_RenderCopy(renderer, Texture11, NULL, &rect);
 			}
@@ -184,6 +225,9 @@ void Level::Update(float deltaTime)
 			else if (mapinfo == 18) {
 				SDL_RenderCopy(renderer, Texture18, NULL, &rect);
 			}
+			else if (mapinfo == 19) {
+				SDL_RenderCopy(renderer, Texture19, NULL, &rect);
+			}
 		}
 	}
 	//covering (visible area and numbers)
@@ -195,8 +239,12 @@ void Level::Update(float deltaTime)
 			rect.x = x * TEXSIZE;
 			rect.y = y * TEXSIZE + TOPOFFSET;
 			if (covinfo == 9) {
-				SDL_RenderCopy(renderer, Texture9, NULL, &rect); //some cover
-			}else{/*clear*/}
+				SDL_RenderCopy(renderer, Texture9, NULL, &rect);	//some cover
+			}
+			else if (covinfo==11) {
+				SDL_RenderCopy(renderer, Texture20, NULL, &rect);	//mine marked
+			}
+			else {/*clear*/ }
 
 		}
 	}

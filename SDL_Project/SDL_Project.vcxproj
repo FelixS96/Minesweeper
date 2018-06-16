@@ -189,6 +189,7 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Splash.h" />
     <ClInclude Include="Startmenu.h" />
@@ -206,11 +207,23 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="bg2.png" />
     <Image Include="bg3.png" />
     <Image Include="bg4.png" />
+    <Image Include="char.ico" />
     <Image Include="char.png" />
     <Image Include="cover.png" />
+    <Image Include="credits.png" />
+    <Image Include="food.png" />
+    <Image Include="help.png" />
     <Image Include="hind.png" />
     <Image Include="hind2.png" />
+    <Image Include="icon1.ico" />
+    <Image Include="menu.png" />
     <Image Include="mine.png" />
+    <Image Include="minemaybe.png" />
+    <Image Include="target.png" />
+    <Image Include="title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SDL_Project.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,7 +12,6 @@ private:
 	Map* map;					//map to draw
 	Player* player;				//player to draw
 	bool textures;				//are textures loaded
-
 	//textures
 	SDL_Texture* Texture1;
 	SDL_Texture* Texture2;
@@ -25,7 +24,6 @@ private:
 	SDL_Texture* Texture7; 
 	SDL_Texture* Texture8; 
 	SDL_Texture* Texture9;
-	SDL_Texture* Texture10;
 	SDL_Texture* Texture11;
 	SDL_Texture* Texture12;
 	SDL_Texture* Texture13;
@@ -35,6 +33,9 @@ private:
 	SDL_Texture* Texture17;
 	SDL_Texture* Texture18;
 	SDL_Texture* Texture19;
+	SDL_Texture* Texture20;
+	SDL_Texture* Texture21;
+	bool mouseup;
 	//collision modes
 	int collide;
 public:

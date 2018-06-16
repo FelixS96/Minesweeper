@@ -67,7 +67,7 @@ Map::Map(int numb)
 			{ 10,10,10,1,2,10,10,10,10,10,10,10 },
 			{ 10,2,10,2,2,10,10,1,10,10,10,10 },
 			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
-			{ 10,10,10,10,10,10,10,10,10,1,10,10 },
+			{ 10,10,4,10,10,10,10,10,10,1,10,10 },
 			{ 10,10,10,10,10,10,1,10,2,10,10,10 },
 			{ 10,10,10,10,2,10,2,10,3,1,10,10 },
 			{ 2,10,10,10,10,10,2,10,10,10,10,10 },
@@ -83,8 +83,8 @@ Map::Map(int numb)
 			{ 10,10,10,1,10,10,10,10,2,1,10,10 },
 			{ 10,10,10,10,10,10,10,2,2,10,10,10 },
 			{ 10,10,10,10,1,10,10,10,2,10,10,10 },
-			{ 10,10,10,10,10,10,10,10,10,10,10,10 },
-			{ 10,10,10,10,10,10,10,10,10,10,10,10 }			
+			{ 10,10,10,10,10,1,10,10,10,10,10,10 },
+			{ 10,10,10,10,10,19,10,10,10,10,10,10 }			
 		};
 	}
 	else if (numb == 2) {					//map 2
@@ -121,42 +121,42 @@ void Map::addnumbers()
 				checkcoords(x, y);
 
 				if (down == false) {
-					if (mapptr[x][y + 1] > 9) {
+					if (mapptr[x][y + 1] > 9&& mapptr[x][y + 1] < 18) {
 						mapptr[x][y + 1] += 1;
 					}
 				}
 				if (up == false) {
-					if (mapptr[x][y - 1] > 9) {
+					if (mapptr[x][y - 1] > 9&& mapptr[x][y - 1] < 18) {
 						mapptr[x][y - 1] += 1;
 					}
 				}
 
 				if (right == false) {
-					if (mapptr[x+1][y] > 9) {
+					if (mapptr[x+1][y] > 9&& mapptr[x + 1][y] < 18) {
 						mapptr[x + 1][y] += 1;
 					}
 					if (down == false) {
-						if (mapptr[x + 1][y + 1] > 9) {
+						if (mapptr[x + 1][y + 1] > 9&& mapptr[x + 1][y + 1] < 18) {
 							mapptr[x + 1][y + 1] += 1;
 						}
 					}
 					if (up == false) {
-						if (mapptr[x + 1][y - 1] > 9) {
+						if (mapptr[x + 1][y - 1] > 9&& mapptr[x + 1][y - 1] < 18) {
 							mapptr[x + 1][y - 1] += 1;
 						}
 					}
 				}
 				if (left == false) {
-					if (mapptr[x - 1][y] > 9) {
+					if (mapptr[x - 1][y] > 9&& mapptr[x - 1][y] < 18) {
 						mapptr[x - 1][y] += 1;
 					}
 					if (down == false) {
-						if (mapptr[x - 1][y + 1] > 9) {
+						if (mapptr[x - 1][y + 1] > 9&& mapptr[x - 1][y + 1] < 18) {
 							mapptr[x - 1][y + 1] += 1;
 						}
 					}
 					if (up == false) {
-						if (mapptr[x - 1][y - 1] > 9) {
+						if (mapptr[x - 1][y - 1] > 9&&mapptr[x - 1][y - 1] < 18) {
 							mapptr[x - 1][y - 1] += 1;
 						}
 					}
@@ -168,7 +168,7 @@ void Map::addnumbers()
 void Map::checkpos(int x, int y,int xo, int yo)
 {
 	//int returnstate;
-	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 10)&&covptr[x][y]==9) {
+	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 10|| mapptr[x][y] == 4)&&covptr[x][y]==9) {
 		covptr[x][y] = 10;
 	}
 	else if (mapptr[x][y] > 10 && mapptr[xo][yo] == 10) {
@@ -184,9 +184,12 @@ void Map::update(int x, int y)				//change
 	up = false;
 	down = false;
 	checkcoords(x, y);
+	//uncover under player
 	if (covptr[x][y] == 9) {
 		covptr[x][y] = 0;
 	}
+	//uncover around player 
+	//uncover numbers if the player is on no number
 	if (down == false) {
 		checkpos(x, y + 1,x,y);
 	}
@@ -225,8 +228,66 @@ int Map::getposdata(int x, int y)
 	}else 
 	if(mapptr[x][y]== 1) {	//check for mines
 		mapptr[x][y] = 0;	//delete mine you stepped on
+		if (covptr[x][y] == 11) {
+			covptr[x][y] = 10;
+		}
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+		
+		checkcoords(x, y);
+		//lower numbers around bom that got destroyed
+		if (down == false) {
+			if (mapptr[x][y + 1] > 9&& mapptr[x][y + 1] < 18) {
+				mapptr[x][y + 1] -= 1;
+			}
+		}
+		if (up == false) {
+			if (mapptr[x][y - 1] > 9&&mapptr[x][y - 1]< 18) {
+				mapptr[x][y - 1] -= 1;
+			}
+		}
 
+		if (right == false) {
+			if (mapptr[x + 1][y] > 9&&mapptr[x + 1][y]< 18) {
+				mapptr[x + 1][y] -= 1;
+			}
+			if (down == false) {
+				if (mapptr[x + 1][y + 1] > 9&&mapptr[x + 1][y + 1] < 18) {
+					mapptr[x + 1][y + 1] -= 1;
+				}
+			}
+			if (up == false) {
+				if (mapptr[x + 1][y - 1] > 9&&mapptr[x + 1][y - 1] < 18) {
+					mapptr[x + 1][y - 1] -= 1;
+				}
+			}
+		}
+		if (left == false) {
+			if (mapptr[x - 1][y] > 9&&mapptr[x - 1][y] < 18) {
+				mapptr[x - 1][y] -= 1;
+			}
+			if (down == false) {
+				if (mapptr[x - 1][y + 1] > 9&&mapptr[x - 1][y + 1] < 18) {
+					mapptr[x - 1][y + 1] -= 1;
+				}
+			}
+			if (up == false) {
+				if (mapptr[x - 1][y - 1] > 9&&mapptr[x - 1][y - 1] < 18) {
+					mapptr[x - 1][y - 1] -= 1;
+				}
+			}
+			
+		}
 		returnstate = 3;
+	}
+	else if (mapptr[x][y] == 4) {	//check for mines
+		mapptr[x][y] = 0;
+		returnstate = 5;
+	}
+	else if (mapptr[x][y] == 19) {
+		returnstate = 4;
 	}
 	else {
 		returnstate = 0;

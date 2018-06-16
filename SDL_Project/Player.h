@@ -8,6 +8,7 @@ public:
 	int xpos;
 	int ypos;
 	int hp;
+	int money;
 	~Player();
 };
 
