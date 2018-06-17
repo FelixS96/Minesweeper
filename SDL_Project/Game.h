@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_mixer.h>
 #include "Screen.h"
 #include "Level.h"
 #include "Startmenu.h"
@@ -16,6 +17,7 @@ public:
 	fullscreenimage * fullscreen;
 	Game();
 	Level* level = nullptr;
+	Mix_Music *music = NULL;
 	bool once;
 	int levelcode = 1;
 	int GetState();

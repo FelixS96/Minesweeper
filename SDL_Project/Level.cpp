@@ -126,6 +126,10 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 			player->moveTo(px, py);							//move player to 
 			map->update(px, py);							//update visible areas
 			player->hp -= 1;								//player steped on a mine and lost hp
+			if (player->hp == 0) {
+				finished = true;
+				Gamestate = 3;
+			}
 		}
 		else if (collide == 5) {							//check if player hit food
 			player->moveTo(px, py);							//move player to 

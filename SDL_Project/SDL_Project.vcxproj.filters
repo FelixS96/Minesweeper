@@ -22,6 +22,9 @@
     <Filter Include="Source Files\pics">
       <UniqueIdentifier>{d08c56d7-f105-4df9-af66-113098c4a7ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sound">
+      <UniqueIdentifier>{a0c2c0e2-b85b-4336-a084-93bcd3e3b6d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -160,10 +163,35 @@
     <Image Include="char.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="test\background.png">
+      <Filter>Source Files\sound</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_Project.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="test\beat.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="test\high.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="test\low.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="test\medium.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="test\scratch.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="test\lazy.ttf">
+      <Filter>Source Files\sound</Filter>
+    </Font>
   </ItemGroup>
 </Project>
