@@ -163,9 +163,6 @@
     <Image Include="char.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="test\background.png">
-      <Filter>Source Files\sound</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_Project.rc">
@@ -173,25 +170,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="test\beat.wav">
+    <Media Include="music.wav">
       <Filter>Source Files\sound</Filter>
     </Media>
-    <Media Include="test\high.wav">
-      <Filter>Source Files\sound</Filter>
-    </Media>
-    <Media Include="test\low.wav">
-      <Filter>Source Files\sound</Filter>
-    </Media>
-    <Media Include="test\medium.wav">
-      <Filter>Source Files\sound</Filter>
-    </Media>
-    <Media Include="test\scratch.wav">
-      <Filter>Source Files\sound</Filter>
-    </Media>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="test\lazy.ttf">
-      <Filter>Source Files\sound</Filter>
-    </Font>
   </ItemGroup>
 </Project>

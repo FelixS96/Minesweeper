@@ -20,9 +20,17 @@ Game::Game()
 	screen = SDL_CreateWindow("Finding Home", 50, 50, 1600, 950,SDL_WINDOW_SHOWN); //1600 780 +  hud
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
 	once = false;
-	music = Mix_LoadMUS("beat.wav");
-	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
-	Mix_PlayMusic(music, -1);
+	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);								//audio channel
+	music = Mix_LoadMUS("music.wav");												//load file
+	std::cout << Mix_GetError() << std::endl;
+	
+	//music = Mix_LoadMUS("beat.wav");
+	//no music playing
+	if (Mix_PlayingMusic() == 0)
+	{
+		//Play the music
+		Mix_PlayMusic(music, -1);
+	}	
 }
 //get set state
 int Game::GetState()
@@ -111,5 +119,6 @@ void Game::Update(float deltaTime)
 
 Game::~Game()
 {
+	Mix_FreeMusic(music);
 	SDL_Quit();
 }

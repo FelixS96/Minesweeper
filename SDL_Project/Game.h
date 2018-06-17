@@ -5,6 +5,8 @@
 #include "Level.h"
 #include "Startmenu.h"
 #include "fullscreenimage.h"
+#include <iostream>
+#include <string>
 class Game
 {
 private:

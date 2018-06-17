@@ -223,6 +223,9 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
   <ItemGroup>
     <ResourceCompile Include="SDL_Project.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="music.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
