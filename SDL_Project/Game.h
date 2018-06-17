@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "Startmenu.h"
 #include "fullscreenimage.h"
+#include "intro.h"
 #include <iostream>
 #include <string>
 class Game
@@ -17,6 +18,7 @@ public:
 	SDL_Window* screen;
 	SDL_Renderer* renderer;
 	fullscreenimage * fullscreen;
+	intro * introduction;
 	Game();
 	Level* level = nullptr;
 	Mix_Music *music = NULL;

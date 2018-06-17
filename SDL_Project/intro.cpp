@@ -1,10 +1,10 @@
-#include "fullscreenimage.h"
+#include "intro.h"
 
 
-//create picture in renderer
-fullscreenimage::fullscreenimage(std::string name, SDL_Renderer*renderer, int i)
+
+intro::intro(std::string name, SDL_Renderer*renderer)
 {
-	m = i;
+	m =0;
 	Texture1 = loadTexture(name, renderer);
 	SDL_Rect rect;
 	rect.h = 950;
@@ -16,18 +16,18 @@ fullscreenimage::fullscreenimage(std::string name, SDL_Renderer*renderer, int i)
 
 	//show renderer
 	SDL_RenderPresent(renderer);
-	while (m==i) {
+	while (m == 0) {
 		SDL_PollEvent(&e);
 		if (e.type == SDL_KEYDOWN) {
-			if (e.key.keysym.sym == SDLK_ESCAPE) {		//go back to startmenu
+			if (e.key.keysym.sym == SDLK_RETURN) {		//go back to startmenu
+				printf("enter");
 				m = 2;
 			}
 		}
 	}
-	
 }
 //how to load textures
-SDL_Texture* fullscreenimage::loadTexture(std::string path, SDL_Renderer* renderer) {
+SDL_Texture* intro::loadTexture(std::string path, SDL_Renderer* renderer) {
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
@@ -35,6 +35,6 @@ SDL_Texture* fullscreenimage::loadTexture(std::string path, SDL_Renderer* render
 	return newTexture;
 }
 
-fullscreenimage::~fullscreenimage()
+intro::~intro()
 {
 }

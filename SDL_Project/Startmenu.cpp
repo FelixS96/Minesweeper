@@ -120,6 +120,13 @@ void Startmenu::update(SDL_Renderer* renderer)
 					selected = 0;
 					SDL_RenderClear(renderer);
 				}
+				else if (mx > 146 && mx < 212 && my>187 && my < 253) {			//hidden Button
+					printf("easteregg");
+					mouseup = true;
+					Gamestate = 6;
+					selected = 0;
+					SDL_RenderClear(renderer);
+				}
 			}
 		}
 	}

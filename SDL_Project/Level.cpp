@@ -65,6 +65,7 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 		Texture21 = loadTexture("food.png", renderer);
 		Texture22 = loadTexture("coin.png", renderer);
 		Texture23 = loadTexture("plus.png", renderer);
+		Texture24 = loadTexture("vortex.png", renderer);
 		textures = true;									//textures loaded
 	}
 	//target rect for rendering tasks
@@ -185,6 +186,18 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 				}
 				Mix_PlayChannel(-1, eating, 0);
 			}
+			else if (collide == 6) {
+				bool free = false;
+				while (!free) {
+					int randx = rand() % 25;
+					int randy = rand() % 10;
+					if (map->mapptr[randx][randy] == 10) {
+						free = true;
+						player->moveTo(randx, randy);
+						map->update(randx, randy);
+					}
+				}
+			}
 			else if (collide == 4) {
 				player->moveTo(px, py);
 				//------------------------------------popup
@@ -279,6 +292,9 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 			}
 			else if (mapinfo == 19) {
 				SDL_RenderCopy(renderer, Texture19, NULL, &rect);
+			}
+			else if (mapinfo == 5) {
+				SDL_RenderCopy(renderer, Texture24, NULL, &rect);
 			}
 		}
 	}

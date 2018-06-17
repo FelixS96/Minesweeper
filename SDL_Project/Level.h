@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include <string>
 #include <vector>
+#include <math.h>
 class Level
 {
 private:
@@ -38,6 +39,7 @@ private:
 	SDL_Texture* Texture21;
 	SDL_Texture* Texture22;
 	SDL_Texture* Texture23;
+	SDL_Texture* Texture24;
 	Mix_Chunk *click = NULL;
 	Mix_Chunk *dead = NULL;
 	Mix_Chunk *win = NULL;

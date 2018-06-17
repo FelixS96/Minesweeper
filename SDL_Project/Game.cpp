@@ -4,7 +4,7 @@
 #include "Map.h"
 
 //different gamestates
-enum gamestate { exitgame, splash, startmen, ingame,credits,help, gameover };
+enum gamestate { exitgame, splash, startmen, ingame,credits,help, hidden,introd };
 //start in the state ---
 gamestate gamestatus= splash;
 Startmenu* startmenu = new Startmenu();
@@ -57,7 +57,31 @@ void Game::Update(float deltaTime)
 		startmenu->once(renderer);
 		SDL_Delay(200);
 		startmenu->mouseup = false;
-		gamestatus = startmen;				//switch to menu
+		gamestatus = introd;				//switch to menu
+		break;
+	case introd:
+		introduction = new intro("cut1.png", renderer);	//show credits and go back with escape
+		if (introduction->m == 2) {
+			delete(fullscreen);
+			SDL_Delay(200);
+		}
+		introduction = new intro("cut2.png", renderer);	//show credits and go back with escape
+		if (introduction->m == 2) {
+			delete(fullscreen);
+			SDL_Delay(200);
+		}
+		introduction = new intro("cut3.png", renderer);	//show credits and go back with escape
+		if (introduction->m == 2) {
+			delete(fullscreen);
+			SDL_Delay(200);
+		}
+		introduction = new intro("cut4.png", renderer);	//show credits and go back with escape
+		if (introduction->m == 2) {
+			delete(fullscreen);
+			SDL_Delay(200);
+		}
+		startmenu->mouseup = false;
+		gamestatus = startmen;
 		break;
 	case startmen:
 		startmenu->update(renderer);
@@ -70,6 +94,9 @@ void Game::Update(float deltaTime)
 		}
 		else if (startmenu->Gamestate == 5) {
 			gamestatus = help;				//switch to help
+		}
+		else if (startmenu->Gamestate == 6) {
+			gamestatus = hidden;				//switch to help
 		}
 		break;
 	case ingame:
@@ -108,7 +135,15 @@ void Game::Update(float deltaTime)
 			startmenu->mouseup = false;
 		}
 		break;
-	case gameover:
+	case hidden:
+		fullscreen = new fullscreenimage("easter.png", renderer, 6);		//show help and go back with escape
+		if (fullscreen->m == 2) {
+			gamestatus = startmen;
+			startmenu->Gamestate = 2;
+			delete(fullscreen);
+			SDL_Delay(200);
+			startmenu->mouseup = false;
+		}
 		break;
 	}
 }

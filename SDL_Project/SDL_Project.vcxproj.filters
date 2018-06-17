@@ -54,6 +54,9 @@
     <ClCompile Include="fullscreenimage.cpp">
       <Filter>Source Files\states</Filter>
     </ClCompile>
+    <ClCompile Include="intro.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fullscreenimage.h">
+      <Filter>Header Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="intro.h">
       <Filter>Header Files\states</Filter>
     </ClInclude>
   </ItemGroup>
@@ -170,6 +176,24 @@
       <Filter>Source Files\pics</Filter>
     </Image>
     <Image Include="plus.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="easter.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="cut1.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="cut2.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="cut3.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="cut4.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="vortex.png">
       <Filter>Source Files\pics</Filter>
     </Image>
   </ItemGroup>

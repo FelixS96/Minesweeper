@@ -174,6 +174,7 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClCompile Include="fullscreenimage.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameover.cpp" />
+    <ClCompile Include="intro.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -185,6 +186,7 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ClInclude Include="fullscreenimage.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameover.h" />
+    <ClInclude Include="intro.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
@@ -210,6 +212,11 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="coin.png" />
     <Image Include="cover.png" />
     <Image Include="credits.png" />
+    <Image Include="cut1.png" />
+    <Image Include="cut2.png" />
+    <Image Include="cut3.png" />
+    <Image Include="cut4.png" />
+    <Image Include="easter.png" />
     <Image Include="food.png" />
     <Image Include="heart.png" />
     <Image Include="help.png" />
@@ -222,6 +229,7 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="plus.png" />
     <Image Include="target.png" />
     <Image Include="title.png" />
+    <Image Include="vortex.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_Project.rc" />
