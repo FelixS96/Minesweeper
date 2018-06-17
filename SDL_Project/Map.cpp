@@ -217,10 +217,10 @@ void Map::addnumbers()					//add numbers around the mines in mapptr
 		}
 	}
 }
-void Map::checkpos(int x, int y,int xo, int yo)				//uncover x y while standing at xo yo
+void Map::checkpos(int x, int y, int xo, int yo)				//uncover x y while standing at xo yo
 {
 	//int returnstate;
-	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3|| mapptr[x][y] == 10|| mapptr[x][y] == 4)&&covptr[x][y]==9) {		//uncover if walls, nothing or food and not uncovered
+	if ((mapptr[x][y] == 2 || mapptr[x][y] == 3 || mapptr[x][y] == 10 || mapptr[x][y] == 4 || mapptr[x][y]==5) && covptr[x][y] == 9) {		//uncover if walls, nothing or food and not uncovered
 		covptr[x][y] = 10;
 	}
 	else if (mapptr[x][y] > 10 && mapptr[xo][yo] == 10) {		//uncover if standing on no number and target is a number
