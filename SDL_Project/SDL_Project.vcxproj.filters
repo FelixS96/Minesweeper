@@ -163,6 +163,15 @@
     <Image Include="char.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="heart.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="coin.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
+    <Image Include="plus.png">
+      <Filter>Source Files\pics</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_Project.rc">
@@ -171,6 +180,21 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="music.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="dead.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="win.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="explosion.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="eating.wav">
+      <Filter>Source Files\sound</Filter>
+    </Media>
+    <Media Include="click.wav">
       <Filter>Source Files\sound</Filter>
     </Media>
   </ItemGroup>

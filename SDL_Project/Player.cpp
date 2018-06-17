@@ -1,13 +1,13 @@
 #include "Player.h"
 
 
-//create player
-Player::Player(int x, int y)
+//create player with money
+Player::Player(int x, int y, int money)
 {
 	this->xpos =  x;
 	this->ypos =  y;
 	hp = 1;
-	money = 10;
+	this->money = money;
 }
 //change position
 void Player::moveTo(int x, int y)

@@ -20,6 +20,11 @@ public:
 	Game();
 	Level* level = nullptr;
 	Mix_Music *music = NULL;
+	Mix_Chunk *click = NULL;
+	Mix_Chunk *dead = NULL;
+	Mix_Chunk *win = NULL;
+	Mix_Chunk *eat = NULL;
+	Mix_Chunk *explosion = NULL;
 	bool once;
 	int levelcode = 1;
 	int GetState();

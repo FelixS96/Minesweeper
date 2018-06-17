@@ -22,9 +22,6 @@ Game::Game()
 	once = false;
 	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);								//audio channel
 	music = Mix_LoadMUS("music.wav");												//load file
-	std::cout << Mix_GetError() << std::endl;
-	
-	//music = Mix_LoadMUS("beat.wav");
 	//no music playing
 	if (Mix_PlayingMusic() == 0)
 	{

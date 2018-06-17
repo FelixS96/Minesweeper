@@ -1,6 +1,5 @@
 #include "Startmenu.h"
 
-
 //load texture with path into renderer
 SDL_Texture * Startmenu::loadTexture(std::string path, SDL_Renderer * renderer)
 {
@@ -13,9 +12,11 @@ SDL_Texture * Startmenu::loadTexture(std::string path, SDL_Renderer * renderer)
 
 
 Startmenu::Startmenu()
-{
+{	//soundchannel and sounds
+	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
 	this->Gamestate = 1;
 	textures = false;
+	one = Mix_LoadWAV("click.wav");
 }
 
 //start with splashscreen when starting the programm
@@ -43,6 +44,7 @@ void Startmenu::once(SDL_Renderer* renderer)
 		}
 		else if (e.type == SDL_MOUSEBUTTONDOWN) {		//clicked to proceed to menu
 			if (e.button.button == SDL_BUTTON_LEFT && mouseup == false) {
+				Mix_PlayChannel(-1, one, 0);
 				Gamestate = 2;
 				textures = false;
 				mouseup = true;
@@ -81,12 +83,14 @@ void Startmenu::update(SDL_Renderer* renderer)
 				SDL_GetMouseState(&mx, &my);
 				if (mx > 730 && mx < 870 && my>300 && my < 350) {				//Level 1 Button
 					printf("Level 1");
+					Mix_PlayChannel(-1, one, 0);
 					mouseup = true;												//prevent multiple clicks
 					Gamestate = 3;
 					selected = 1;												//selected Level
 					SDL_RenderClear(renderer);
 				}else if (mx > 730 && mx < 870 && my>400 && my < 450) {			//Level 2 Button
 					printf("Level 2");
+					Mix_PlayChannel(-1, one, 0);
 					mouseup = true;
 					Gamestate = 3;
 					selected = 2;
@@ -94,6 +98,7 @@ void Startmenu::update(SDL_Renderer* renderer)
 				}
 				else if (mx > 730 && mx < 870 && my>500 && my < 550) {			//Level 3 Button
 					printf("Level 3");
+					Mix_PlayChannel(-1, one, 0);
 					mouseup = true;
 					Gamestate = 3;
 					selected = 3;
@@ -101,6 +106,7 @@ void Startmenu::update(SDL_Renderer* renderer)
 				}
 				else if (mx > 730 && mx < 870 && my>600 && my < 650) {			//Credits Button
 					printf("Credits");
+					Mix_PlayChannel(-1, one, 0);
 					mouseup = true;
 					Gamestate = 4;
 					selected = 0;
@@ -108,6 +114,7 @@ void Startmenu::update(SDL_Renderer* renderer)
 				}
 				else if (mx > 750 && mx < 850 && my>700 && my < 750) {			//help Button
 					printf("help");
+					Mix_PlayChannel(-1, one, 0);
 					mouseup = true;
 					Gamestate = 5;
 					selected = 0;

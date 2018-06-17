@@ -207,9 +207,11 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="bg4.png" />
     <Image Include="char.ico" />
     <Image Include="char.png" />
+    <Image Include="coin.png" />
     <Image Include="cover.png" />
     <Image Include="credits.png" />
     <Image Include="food.png" />
+    <Image Include="heart.png" />
     <Image Include="help.png" />
     <Image Include="hind.png" />
     <Image Include="hind2.png" />
@@ -217,6 +219,7 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <Image Include="menu.png" />
     <Image Include="mine.png" />
     <Image Include="minemaybe.png" />
+    <Image Include="plus.png" />
     <Image Include="target.png" />
     <Image Include="title.png" />
   </ItemGroup>
@@ -224,7 +227,12 @@ xcopy /y /d  "$(SolutionDir)Dependencies\SDL2_ttf\lib\$(PlatformTarget)\*.dll" "
     <ResourceCompile Include="SDL_Project.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="click.wav" />
+    <Media Include="dead.wav" />
+    <Media Include="eating.wav" />
+    <Media Include="explosion.wav" />
     <Media Include="music.wav" />
+    <Media Include="win.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

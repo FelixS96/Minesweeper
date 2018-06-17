@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <string>
 class Startmenu
 {
@@ -13,6 +14,7 @@ public:
 	SDL_Event e;
 	int Gamestate;
 	SDL_Texture* loadTexture(std::string path, SDL_Renderer* renderer);
+	Mix_Chunk *one = NULL;
 	Startmenu();
 	void once(SDL_Renderer* renderer);
 	void update(SDL_Renderer* renderer);

@@ -11,13 +11,21 @@ Level::Level(int num)
 	//Create Textures
 	map = new Map(num);	
 	map->addnumbers();
-	player = new Player(0,0);
+	int hard = 10 / num;
+	player = new Player(0,0,hard);
 	
 	//Gamestate running
 	//textures not loaded
 	this->Gamestate = 1;
 	textures = false;
 	finished = false;
+	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+	click = Mix_LoadWAV("click.wav");
+	dead = Mix_LoadWAV("dead.wav");
+	win = Mix_LoadWAV("win.wav");
+	eating = Mix_LoadWAV("eating.wav");
+	explosion = Mix_LoadWAV("explosion.wav");
+	pause = false;
 }
 
 //how to load textures
@@ -32,7 +40,7 @@ SDL_Texture* Level::loadTexture(std::string path, SDL_Renderer* renderer) {
 //used while running
 void Level::Update(float deltaTime, SDL_Renderer* renderer)
 {
-
+	
 	if (textures == false) {								//load textures if not loaded
 		Texture1 = loadTexture("bg1.png", renderer);
 		Texture2 = loadTexture("bg2.png", renderer);
@@ -43,6 +51,7 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 		Texture7 = loadTexture("hind.png", renderer);
 		Texture8 = loadTexture("hind2.png", renderer);
 		Texture9 = loadTexture("cover.png", renderer);
+		Texture10 = loadTexture("heart.png", renderer);
 		Texture11 = loadTexture("1.png", renderer);
 		Texture12 = loadTexture("2.png", renderer);
 		Texture13 = loadTexture("3.png", renderer);
@@ -54,6 +63,8 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 		Texture19 = loadTexture("target.png", renderer);
 		Texture20 = loadTexture("minemaybe.png", renderer);
 		Texture21 = loadTexture("food.png", renderer);
+		Texture22 = loadTexture("coin.png", renderer);
+		Texture23 = loadTexture("plus.png", renderer);
 		textures = true;									//textures loaded
 	}
 	//target rect for rendering tasks
@@ -88,25 +99,58 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 		case SDLK_d:
 			px += 1;
 			break;
+		case SDLK_ESCAPE:
+			if (pause&&!buttondown) {
+				pause = false;
+				Mix_ResumeMusic();
+				buttondown = true;
+			}
+			else if(!pause&&!buttondown) { 
+				pause = true;
+				Mix_PauseMusic();
+				SDL_Delay(100);
+				buttondown = true;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	else if (e.type == SDL_KEYUP) {
+		switch (e.key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			buttondown = false;
+			break;
 		default:
 			break;
 		}
 	}
 	else if (e.type == SDL_MOUSEBUTTONDOWN) {
 		if (e.button.button==SDL_BUTTON_LEFT&&mouseup==false) {
-			SDL_GetMouseState(&mx, &my);
-			if (my < 781) {
-				mx /= TEXSIZE;
-				my=(my-TOPOFFSET)/TEXSIZE;
+			if (!pause) {
+				SDL_GetMouseState(&mx, &my);
+				if (my < 681) {
+					mx /= TEXSIZE;
+					my = (my - TOPOFFSET) / TEXSIZE;
+					if (map->covptr[mx][my] == 9) {
+						map->covptr[mx][my] = 11;
+					}
+					else if (map->covptr[mx][my] == 11) {
+						map->covptr[mx][my] = 9;
+					}
+					Mix_PlayChannel(-1, click, 0);
+				}
+				else if (my > 749 && my < 815 && mx>79 && mx < 145) {
+					if (player->money > 1) {
+						player->money -= 2;
+						player->hp += 1;
+					}
+				}
+
+				printf("klick %i %i", mx, my);
+				mouseup = true;
 			}
-			if (map->covptr[mx][my] == 9) {
-				map->covptr[mx][my] = 11;
-			}
-			else if (map->covptr[mx][my] == 11) {
-				map->covptr[mx][my] = 9;
-			}
-			printf("klick %i %i",mx,my);
-			mouseup = true;
 		}
 	}
 	else if (e.type == SDL_MOUSEBUTTONUP) {
@@ -115,37 +159,44 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 			mouseup = false;
 		}
 	}
-
-	if (px != player->xpos || py != player->ypos) {			//check if position changed by keydown
-		collide = map->getposdata(px, py);					//check pos
-		if (collide == 0) {									//if no collision
-			player->moveTo(px, py);							//move player to
-			map->update(px, py);							//update visible areas
-		}
-		else if (collide == 3) {							//check if player hit a mine
-			player->moveTo(px, py);							//move player to 
-			map->update(px, py);							//update visible areas
-			player->hp -= 1;								//player steped on a mine and lost hp
-			if (player->hp == 0) {
-				finished = true;
-				Gamestate = 3;
+	if (!pause) {
+		if (px != player->xpos || py != player->ypos) {			//check if position changed by keydown
+			collide = map->getposdata(px, py);					//check pos
+			if (collide == 0) {									//if no collision
+				player->moveTo(px, py);							//move player to
+				map->update(px, py);							//update visible areas
 			}
-		}
-		else if (collide == 5) {							//check if player hit food
-			player->moveTo(px, py);							//move player to 
-			map->update(px, py);							//update visible areas
-			player->hp += 1;								//player steped on food and got hp
-		}
-		else if (collide == 4) {
-			player->moveTo(px, py);
-			//------------------------------------popup
-			for (int x = 0; x < XSIZE; x++) {
-				for (int y = 0; y < YSIZE; y++) {
-					map->covptr[x][y] = 0;
+			else if (collide == 3) {							//check if player hit a mine
+				player->moveTo(px, py);							//move player to 
+				map->update(px, py);							//update visible areas
+				player->hp -= 1;								//player steped on a mine and lost hp
+				Mix_PlayChannel(-1, explosion, 0);
+				if (player->hp == 0) {
+					finished = true;
+					Mix_PlayChannel(-1, dead, 0);
+					Gamestate = 3;
 				}
 			}
-			finished = true;
-			Gamestate = 2;
+			else if (collide == 5) {							//check if player hit food
+				player->moveTo(px, py);							//move player to 
+				map->update(px, py);							//update visible areas
+				if (player->hp < 8) {
+					player->hp += 1;								//player steped on food and got hp
+				}
+				Mix_PlayChannel(-1, eating, 0);
+			}
+			else if (collide == 4) {
+				player->moveTo(px, py);
+				//------------------------------------popup
+				for (int x = 0; x < XSIZE; x++) {
+					for (int y = 0; y < YSIZE; y++) {
+						map->covptr[x][y] = 0;
+					}
+				}
+				Mix_PlayChannel(-1, win, 0);
+				finished = true;
+				Gamestate = 2;
+			}
 		}
 	}
 	//set rect size
@@ -249,6 +300,36 @@ void Level::Update(float deltaTime, SDL_Renderer* renderer)
 
 		}
 	}
+	
+	//draw hearts
+	for (int i = 0; i < player->hp; i++) {
+		int row = 0;
+		int x=i;
+		if (i > 4) {
+			row += 70;
+			x -= 5;
+		}
+		rect.x = 150 + x * 70;
+		rect.y = 750 + row;
+		SDL_RenderCopy(renderer, Texture10, NULL, &rect);
+	}
+	//draw money
+	for (int i = 0; i < player->money; i++) {
+		int row = 0;
+		int x = i;
+		if (i > 4) {
+			row += 70;
+			x -= 5;
+		}
+		rect.x = 1150 + x * 70;
+		rect.y = 750 + row;
+		SDL_RenderCopy(renderer, Texture22, NULL, &rect);
+	}
+	//draw + for hearts
+	rect.x = 80;
+	rect.y = 750;
+	SDL_RenderCopy(renderer, Texture23, NULL, &rect);
+	
 	//target area for player
 	rect.x = player->xpos * TEXSIZE;
 	rect.y = player->ypos * TEXSIZE + TOPOFFSET;

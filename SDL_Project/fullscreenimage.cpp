@@ -21,6 +21,7 @@ fullscreenimage::fullscreenimage(std::string name, SDL_Renderer*renderer, int i)
 		if (e.type == SDL_KEYDOWN) {
 			if (e.key.keysym.sym == SDLK_ESCAPE) {		//go back to startmenu
 				m = 2;
+				Mix_PlayChannel(-1, click, 0);
 			}
 		}
 	}

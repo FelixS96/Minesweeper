@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Player.h"
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <string>
 #include <vector>
 class Level
@@ -23,6 +24,7 @@ private:
 	SDL_Texture* Texture7; 
 	SDL_Texture* Texture8; 
 	SDL_Texture* Texture9;
+	SDL_Texture* Texture10;
 	SDL_Texture* Texture11;
 	SDL_Texture* Texture12;
 	SDL_Texture* Texture13;
@@ -34,7 +36,16 @@ private:
 	SDL_Texture* Texture19;
 	SDL_Texture* Texture20;
 	SDL_Texture* Texture21;
+	SDL_Texture* Texture22;
+	SDL_Texture* Texture23;
+	Mix_Chunk *click = NULL;
+	Mix_Chunk *dead = NULL;
+	Mix_Chunk *win = NULL;
+	Mix_Chunk *eating = NULL;
+	Mix_Chunk *explosion = NULL;
+	bool pause;
 	bool mouseup;
+	bool buttondown;
 	SDL_Event e;				//events
 	//collision modes
 	int collide;
